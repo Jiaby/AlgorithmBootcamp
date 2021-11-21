@@ -6,9 +6,9 @@ package org.homework.firstweek.linkedList;
  * @date 2021/11/18 23:22
  */
 public class ListNode {
-    int value;
-    ListNode next;
-    ListNode pre;
+    public int value;
+    public ListNode next;
+    public ListNode pre;
 
     public ListNode() { }
 

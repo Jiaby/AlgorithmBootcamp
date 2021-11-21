@@ -69,4 +69,42 @@ public class TestInClass {
             head = nextNode;
         }
     }
+
+
+    // 判断链表是否有环
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * 判断是否有环且返回环的第一个结点
+     * meet = 相遇结点， st = 环的第一个结点，l = head -> st, p = st -> meet, r = 环长
+     * 因为快指针速度是慢指针2倍， 慢指针走的距离为 l+p 那么快指针就是 2(l+p)
+     * 快指针速度还可以表示为 l + p + k * r 得 l = k * r - p  = (k - 1) r + (r - p) 得出 l 与 (r-p) 对于整圈数同余
+     * r - p 又刚好是 慢指针未走完的环形距离
+     * 相遇时让慢指针 继续， head开始走，slow = head时即是st结点
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow) {
+                ListNode pre = head;
+                while (pre != slow) {
+                    slow = slow.next;
+                    pre = pre.next;
+                }
+                return pre;
+            }
+        }
+        return null;
+    }
 }
