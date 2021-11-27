@@ -1,4 +1,4 @@
-package org.homework.firstweek.stackAndQueue;
+package org.train.firstweek.stackAndQueue;
 
 import java.util.*;
 

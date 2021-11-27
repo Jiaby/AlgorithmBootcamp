@@ -1,4 +1,4 @@
-package org.homework.firstweek.array;
+package org.train.firstweek.array;
 
 import java.util.Arrays;
 

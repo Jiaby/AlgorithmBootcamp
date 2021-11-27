@@ -1,4 +1,4 @@
-package org.homework.firstweek.linkedList;
+package org.train.firstweek.linkedList;
 
 /**
  * @author liuyue

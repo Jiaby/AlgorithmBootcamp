@@ -1,4 +1,4 @@
-package org.homework.firstweek.array;
+package org.train.firstweek.array;
 
 /**
  * @author jiaby

@@ -1,8 +1,7 @@
-package org.homework.firstweek.stackAndQueue;
+package org.train.firstweek.stackAndQueue;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
 /**
