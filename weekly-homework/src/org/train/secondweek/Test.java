@@ -1,4 +1,4 @@
-package org.homework.mac;
+package org.train.secondweek;
 
 public class Test {
     //@link https://leetcode-cn.com/problems/count-number-of-nice-subarrays/

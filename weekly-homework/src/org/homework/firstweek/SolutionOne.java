@@ -1,4 +1,4 @@
-package org.train.firstweek;
+package org.homework.firstweek;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -8,7 +8,7 @@ import java.util.Stack;
  * @author liuyue
  * @date 2021/11/16 22:20
  */
-public class TestOne {
+public class SolutionOne {
     /**
      * 加一
      * @link https://leetcode-cn.com/problems/plus-one/

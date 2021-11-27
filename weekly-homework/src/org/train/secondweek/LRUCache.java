@@ -1,4 +1,4 @@
-package org.homework.mac;
+package org.train.secondweek;
 
 import java.util.HashMap;
 import java.util.Map;
