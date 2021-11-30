@@ -23,19 +23,5 @@ public class WeeklyWork {
         return -1;
     }
 
-    /**
-     * @Link https://leetcode-cn.com/problems/number-of-submatrices-that-sum-to-target/
-     */
-    public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        return -1;
 
-    }
-
-    /**
-     * @link https://leetcode-cn.com/problems/subarray-sum-equals-k/
-     */
-    public int subarraySum(int[] nums, int k) {
-        return -1;
-
-    }
 }

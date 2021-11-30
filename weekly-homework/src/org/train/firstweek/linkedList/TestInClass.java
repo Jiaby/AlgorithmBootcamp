@@ -1,5 +1,8 @@
 package org.train.firstweek.linkedList;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 /**
  * @author liuyue
  * @Description: 练习
@@ -106,5 +109,65 @@ public class TestInClass {
             }
         }
         return null;
+    }
+
+    /**
+     * 邻值查找
+     * @link https://www.acwing.com/problem/content/description/138/
+     */
+    public int[][] neighborLookup(int n, int[] num) {
+        Integer[] rk = new Integer[n];
+        for (int i = 0; i < rk.length; i++) {
+            rk[i] = i;
+        }
+        // 对rk排序，以num[rk[i]]的大小来排序
+        Arrays.sort(rk, Comparator.comparingInt(a -> num[a]));
+        ListNode[] pos = new ListNode[n];
+        ListNode head = new ListNode();
+        ListNode tail = new ListNode();
+        head.next = tail;
+        head.value = Integer.MIN_VALUE;
+        tail.pre = head;
+        tail.value = Integer.MAX_VALUE;
+        for (int i = 0; i < pos.length; i++) {
+            pos[rk[i]] = addNode(tail.pre, num[rk[i]], rk[i]);
+        }
+        int[] ans = new int[n];
+        for (int i = n - 1; i >= 0; i --) {
+            ListNode curr = pos[i];
+            if (num[i] - curr.pre.value <= curr.next.value - num[i]) {
+                ans[i] = curr.pre.idx;
+            } else {
+                ans[i] = curr.next.idx;
+            }
+            deleteNode(curr);
+        }
+        for (int i = 0; i < n; i ++){
+            System.out.println(Math.abs(num[ans[i]] - num[i]) + " " + ans[i]);
+        }
+        return null;
+    }
+
+    private void deleteNode(ListNode node) {
+        ListNode preNode = node.pre;
+        ListNode nextNode = node.next;
+        preNode.next = nextNode;
+        nextNode.pre = preNode;
+        node.next = null;
+        node.pre = null;
+    }
+
+    private ListNode addNode(ListNode node, int val, int idx) {
+        ListNode listNode = new ListNode(val, node.next, node);
+        listNode.idx = idx;
+        node.next.pre = listNode;
+        node.next = listNode;
+        return listNode;
+    }
+
+    public static void main(String[] args) {
+        int[] num = new int[]{1,3,4,5,6,2,8,7};
+        TestInClass testInClass = new TestInClass();
+        testInClass.neighborLookup(8, num);
     }
 }

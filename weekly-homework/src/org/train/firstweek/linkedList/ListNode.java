@@ -9,6 +9,7 @@ public class ListNode {
     public int value;
     public ListNode next;
     public ListNode pre;
+    public int idx;
 
     public ListNode() { }
 

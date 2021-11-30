@@ -123,6 +123,23 @@ public class SolutionTwo {
         return max;
     }
 
+
+    /**
+     * @Link https://leetcode-cn.com/problems/number-of-submatrices-that-sum-to-target/
+     */
+    public int numSubmatrixSumTarget(int[][] matrix, int target) {
+        return -1;
+
+    }
+
+    /**
+     * @link https://leetcode-cn.com/problems/subarray-sum-equals-k/
+     */
+    public int subarraySum(int[] nums, int k) {
+        return -1;
+
+    }
+
     public static void main(String[] args) {
         SolutionTwo solutionTwo = new SolutionTwo();
         System.out.println(solutionTwo.findShortestSubArray(new int[] {6,5,5}));
