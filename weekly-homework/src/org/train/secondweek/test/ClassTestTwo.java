@@ -66,6 +66,7 @@ public class ClassTestTwo {
             delta[first] = delta[first] + seats;
             delta[last + 1] = delta[last + 1] - seats;
         }
+        //再对差分数组求和即是原数组
         int[] sum = new int[n];
         sum[0] = delta[1];
         for (int i = 1; i < sum.length; i++) {
@@ -76,7 +77,7 @@ public class ClassTestTwo {
 }
 
 /**
- * @link https://leetcode-cn.com/problems/range-sum-query-2d-immutable/
+ * @link https://leetcode-cn.com/problems/range-sum-query-2d-immutable
  * 二维区域和检索 - 矩阵不可变
  */
 class NumMatrix {
