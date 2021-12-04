@@ -1,4 +1,4 @@
-package org.train.secondweek;
+package org.common;
 
 import java.util.HashMap;
 import java.util.Map;

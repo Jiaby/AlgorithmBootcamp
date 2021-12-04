@@ -1,4 +1,4 @@
-package org.train.firstweek.linkedList;
+package org.common.struct;
 
 /**
  * @author liuyue

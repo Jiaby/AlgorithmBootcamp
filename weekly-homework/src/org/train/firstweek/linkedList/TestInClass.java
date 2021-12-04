@@ -1,5 +1,7 @@
 package org.train.firstweek.linkedList;
 
+import org.common.struct.ListNode;
+
 import java.util.Arrays;
 import java.util.Comparator;
 
