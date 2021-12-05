@@ -1,6 +1,10 @@
 package org.train.thirdweek;
 
+import org.common.struct.Node;
 import org.common.struct.TreeNode;
+
+
+import java.util.*;
 
 /**
  * @author liuyue
@@ -71,6 +75,98 @@ public class TreeTest {
         }
 
         return min_depth + 1;
+    }
+
+    /**
+     * @link https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+     * @param root
+     * @return 二叉树的中序遍历结果
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ans = new LinkedList<>();
+        if (root != null) {
+            inorderHelp(root, ans);
+        }
+        return ans;
+    }
+
+    private void inorderHelp(TreeNode root, List<Integer> ans) {
+        if (root == null) return ;
+        inorderHelp(root.left, ans);
+        ans.add(root.val);
+        inorderHelp(root.right, ans);
+    }
+
+    /**
+     * @link https://leetcode-cn.com/problems/n-ary-tree-preorder-traversal/submissions/
+     * @desc 多叉树的前序遍历
+     */
+    public List<Integer> preorder(Node root) {
+        List<Integer> ans = new LinkedList<>();
+        if (root == null) return ans;
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            ans.add(node.val);
+            for (int i = node.children.size() - 1; i >= 0 ; i--) {
+                stack.push(node.children.get(i));
+            }
+        }
+        return ans;
+    }
+
+
+    /**
+     * @link https://leetcode-cn.com/problems/n-ary-tree-level-order-traversal/
+     * @desc 多叉树的层序遍历
+     */
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> ans = new LinkedList<>();
+        if (root == null) return ans;
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            List<Integer> nodes = new ArrayList<>();
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                Node node = queue.poll();
+                if (node == null) continue;
+                nodes.add(node.val);
+                if (node.children != null && node.children.size() > 0) {
+                    for (Node child : node.children) {
+                        queue.offer(child);
+                    }
+                }
+            }
+            ans.add(nodes);
+        }
+        return ans;
+    }
+
+    /**
+     * @link https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
+     * @desc 从前序与中序遍历序列构造二叉树
+     */
+    int[] preorder;
+    int[] inorder;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        this.inorder = inorder;
+        this.preorder = preorder;
+        return buildHelp(0, preorder.length - 1, 0, inorder.length - 1);
+    }
+
+    private TreeNode buildHelp(int l1, int r1, int l2, int r2) {
+        if (l1 > r1) return null;
+        TreeNode root = new TreeNode(preorder[l1]);
+        int mid = l2;
+        // 此时mid是root在中序数组中的下标
+        while (inorder[mid] != root.val) mid++;
+        // 左子树的个数就是mid - 1 - l2 + 1 = mid - l2(mid此时是root的位置，所以要减一才能是区间l~r中r的位置）
+        // 左子树的中序就是l2~mid-1, 前序就是l1+1~l1+(mid-1 - l2 + 1)
+        root.left = buildHelp(l1 + 1, l1 + mid - l2, l2, mid - 1);
+        root.right = buildHelp(l1 + mid - l2 + 1, r1, mid + 1, r2);
+        return root;
     }
 
     public static void main(String[] args) {
