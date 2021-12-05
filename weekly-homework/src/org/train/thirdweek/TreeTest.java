@@ -169,6 +169,26 @@ public class TreeTest {
         return root;
     }
 
+    /**
+     * @link https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+     * 二叉树的序列化
+     */
+    public String serialize(TreeNode root) {
+
+    }
+
+    /**
+     * @link https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/
+     * 二叉树的反序列化
+     */
+    public TreeNode deserialize(String data) {
+
+    }
+
+
+
+
+
     public static void main(String[] args) {
         TreeTest treeTest = new TreeTest();
         System.out.println(treeTest.isValidBST(new TreeNode(2147483647)));
