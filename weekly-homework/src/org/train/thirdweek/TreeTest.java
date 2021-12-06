@@ -174,7 +174,7 @@ public class TreeTest {
      * 二叉树的序列化
      */
     public String serialize(TreeNode root) {
-
+        return null;
     }
 
     /**
@@ -182,7 +182,7 @@ public class TreeTest {
      * 二叉树的反序列化
      */
     public TreeNode deserialize(String data) {
-
+        return null;
     }
 
 

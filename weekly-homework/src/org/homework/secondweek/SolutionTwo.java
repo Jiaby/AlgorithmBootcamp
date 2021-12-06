@@ -47,9 +47,9 @@ public class SolutionTwo {
 
     /**
      * 数组的度
-     * 给定一个非空且只包含非负数的整数数组 nums，数组的度的定义是指数组里任一元素出现频数的最大值。
+     * 给定一个非空且只包含非负数的整数数组nums，数组的度的定义是指数组里任一元素出现频数的最大值。
      *
-     * 你的任务是在 nums 中找到与 nums 拥有相同大小的度的最短连续子数组，返回其长度。
+     * 你的任务是在 nums 中找到与nums拥有相同大小的度的最短连续子数组，返回其长度。
      * @link https://leetcode-cn.com/problems/degree-of-an-array/
      */
     public int findShortestSubArray(int[] nums) {
@@ -125,11 +125,45 @@ public class SolutionTwo {
 
 
     /**
-     * @Link https://leetcode-cn.com/problems/number-of-submatrices-that-sum-to-target/
+     * 元素和为目标值的子矩阵数量
+     * 子矩阵x1, y1, x2, y2是满足 x1 <= x <= x2且y1 <= y <= y2的所有单元matrix[x][y]的集合。
+     * 如果(x1, y1, x2, y2) 和(x1', y1', x2', y2')两个子矩阵中部分坐标不同（如：x1 != x1'），那么这两个子矩阵也不同。
+     * @link https://leetcode-cn.com/problems/number-of-submatrices-that-sum-to-target/
+     * @param matrix 二维矩阵
+     * @param target 目标值
+     * @return 元素总和等于目标值的非空子矩阵的数量
      */
     public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        return -1;
-
+        // 本题要求子矩阵的和核心思路为子矩阵的求和公式，即：
+        // 以(p,q)为左上角，(i,j)为右下角的子矩阵中数的和为：SUM(p,q,i,j)=S[i][j]-S[i][q-1]-S[p-1][j]+S[p-1][q-1]
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[][] s = new int[n + 1][m + 1];
+        // 前缀和数组s的求和公式为：s[i][j] = s[i-1][j]+s[i][j-1]-s[i-1][j-1]+a[i][j]
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                s[i][j] = s[i-1][j] + s[i][j-1] - s[i-1][j-1] + matrix[i-1][j-1];
+            }
+        }
+        int cnt = 0;
+        // 先固定上下两条边
+        for (int top = 1; top <= n; top++) {
+            for (int bot = top; bot <= n; bot++) {
+                int cur;
+                // map用来存放{面积:次数}
+                HashMap<Integer, Integer> map = new HashMap<>();
+                //再从左到右移动右边界来形成一个子矩阵
+                for (int right = 1; right <= m; right++) {
+                    // 这个地方是求的以top为上边，以bot为下边，0号列为左边，right为右边的矩阵内数的和
+                    cur = s[bot][right] - s[top][right];
+                    if (cur == target) cnt ++;
+                    // 如果map记录过面积为cur-target的子矩阵(即曾经以x号列为右边的面积为cur-targer)，那么现在遍历到的子矩阵只要从以0号列为左边改为以x边为左边那么面积就是target
+                    if (map.containsKey(cur - target)) cnt+=map.get(cur - target);
+                    map.put(cur, map.getOrDefault(cur, 0) + 1);
+                }
+            }
+        }
+        return cnt;
     }
 
     /**
@@ -142,7 +176,9 @@ public class SolutionTwo {
 
     public static void main(String[] args) {
         SolutionTwo solutionTwo = new SolutionTwo();
-        System.out.println(solutionTwo.findShortestSubArray(new int[] {6,5,5}));
+        int[][] matrix= {{0,1,0},{1,0,1},{0,1,0}};
+        int target = 0;
+        solutionTwo.numSubmatrixSumTarget(matrix, target);
     }
 
 }
