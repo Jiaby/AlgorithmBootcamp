@@ -174,7 +174,25 @@ public class TreeTest {
      * 二叉树的序列化
      */
     public String serialize(TreeNode root) {
-        return null;
+        if (root == null) return "null";
+        StringBuilder stringBuilder = new StringBuilder();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode treeNode = queue.poll();
+                if (treeNode == null) stringBuilder.append("null,");
+                else {
+                    stringBuilder.append(treeNode.val).append(",");
+                    queue.offer(treeNode.left);
+                    queue.offer(treeNode.right);
+                }
+            }
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
+            stringBuilder.append(";");
+        }
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 
     /**
@@ -182,15 +200,33 @@ public class TreeTest {
      * 二叉树的反序列化
      */
     public TreeNode deserialize(String data) {
-        return null;
+        if (data.equals("null")) return null;
+        String[] split = data.split(";");
+        TreeNode root = new TreeNode(Integer.parseInt(split[0]));
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        for (int i = 1; i < split.length; i++) {
+            String[] nodeVals = split[i].split(",");
+            int size = queue.size();
+            int m = 0;
+            for (int j = 0; j < size; j ++) {
+                TreeNode fa = queue.poll();
+                if (fa == null) continue;
+                fa.left = nodeVals[m].equals("null") ? null : new TreeNode(Integer.parseInt(nodeVals[m]));
+                fa.right = nodeVals[m + 1].equals("null") ? null : new TreeNode(Integer.parseInt(nodeVals[m + 1]));
+                queue.offer(fa.left);
+                queue.offer(fa.right);
+                m += 2;
+            }
+        }
+        return root;
     }
-
-
 
 
 
     public static void main(String[] args) {
         TreeTest treeTest = new TreeTest();
-        System.out.println(treeTest.isValidBST(new TreeNode(2147483647)));
+        TreeNode deserialize = treeTest.deserialize("1;2,3;null,4,null,5;null,null,null,null");
+        System.out.println(treeTest.serialize(deserialize));
     }
 }
