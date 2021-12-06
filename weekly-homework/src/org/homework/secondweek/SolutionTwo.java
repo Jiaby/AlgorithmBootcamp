@@ -167,10 +167,21 @@ public class SolutionTwo {
     }
 
     /**
+     * 给你一个整数数组 nums 和一个整数 k ，请你统计并返回该数组中和为 k 的连续子数组的个数。
      * @link https://leetcode-cn.com/problems/subarray-sum-equals-k/
      */
     public int subarraySum(int[] nums, int k) {
-        return -1;
+        int[] sum = new int[nums.length + 1];
+        sum[0] = 0;
+        int ans = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 1; i <= nums.length; i++) {
+            sum[i] = sum[i - 1] + nums[i - 1];
+            if (sum[i] == k) ans ++;
+            if (map.containsKey(sum[i] - k)) ans += map.get(sum[i] - k);
+            map.put(sum[i], map.getOrDefault(sum[i], 0) + 1);
+        }
+        return ans;
 
     }
 
