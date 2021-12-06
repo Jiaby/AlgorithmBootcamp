@@ -155,7 +155,7 @@ public class SolutionTwo {
                 //再从左到右移动右边界来形成一个子矩阵
                 for (int right = 1; right <= m; right++) {
                     // 这个地方是求的以top为上边，以bot为下边，0号列为左边，right为右边的矩阵内数的和
-                    cur = s[bot][right] - s[top][right];
+                    cur = s[bot][right] - s[top - 1][right];
                     if (cur == target) cnt ++;
                     // 如果map记录过面积为cur-target的子矩阵(即曾经以x号列为右边的面积为cur-targer)，那么现在遍历到的子矩阵只要从以0号列为左边改为以x边为左边那么面积就是target
                     if (map.containsKey(cur - target)) cnt+=map.get(cur - target);
