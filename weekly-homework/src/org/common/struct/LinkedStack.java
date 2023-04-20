@@ -9,43 +9,36 @@ public class LinkedStack<T> {
 
     class LinkedNode{
         T value;
-        LinkedNode prev;
         LinkedNode next;
 
-        LinkedNode(T value) {
+        LinkedNode(T value, LinkedNode next) {
             this.value = value;
+            this.next = next;
         }
     }
     private int count;      // 元素个数
 
-    private LinkedNode head;
-
-    private LinkedNode tail;
+    private LinkedNode top; //栈顶元素
 
     public void push(T e) {
-        LinkedNode cur = new LinkedNode(e);
-        if (tail == null) {
-            tail = cur;
-            tail.prev = head;
-        }
-        if (head == null) {
-            head = new LinkedNode(null);
-            head.next = cur;
-        } else {
-            tail.next = cur;
-            cur.prev = tail;
-            tail = cur;
-        }
+        top = new LinkedNode(e, top);
+        count ++;
+
+
     }
 
     public T pop() {
-       if (tail == null) return null;
-       T value = tail.value;
-        LinkedNode n = tail;
-        tail = tail.prev;
-        tail.next = null;
-        n.prev = null;
+        if (top == null) return null;
+        T value = top.value;
+        LinkedNode next = top.next;
+        top.next = null;
+        top = next;
+        count --;
         return value;
+    }
+
+    public boolean isEmpty() {
+        return count <= 0;
     }
 
 
@@ -53,12 +46,13 @@ public class LinkedStack<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        LinkedNode n = head.next;
+        LinkedNode n = top;
         while (n != null) {
             sb.append(n.value).append(',');
+            n = n.next;
         }
         if (sb.length() > 1)
-            sb.deleteCharAt(sb.length() - 1);
+            sb.setLength(sb.length() - 1);
         sb.append(']');
         return sb.toString();
     }

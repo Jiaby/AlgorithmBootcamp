@@ -2,7 +2,15 @@ package org.common.struct;
 
 public class StructTestMain {
     public static void main(String[] args) {
-        testArrayStack();
+        LinkedStack<Integer> linkedStack = new LinkedStack<>();
+        for (int i = 0; i < 10; i++) {
+            linkedStack.push(i);
+        }
+        System.out.println(linkedStack);
+        for (int i = 0; i < 10; i++) {
+            System.out.println(linkedStack.pop());
+        }
+        System.out.println(linkedStack);
     }
 
     private static void testArrayStack() {
