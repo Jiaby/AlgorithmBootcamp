@@ -2,6 +2,26 @@ package org.common.struct;
 
 public class StructTestMain {
     public static void main(String[] args) {
+        ArrayQueue<Integer> arrayQueue = new ArrayQueue<>();
+        for (int i = 0; i < 6; i++) {
+            arrayQueue.enqueue(i);
+        }
+        System.out.println(arrayQueue);
+        for (int i = 0; i < 3; i++) {
+            arrayQueue.dequeue();
+        }
+        System.out.println(arrayQueue);
+        for (int i = 0; i < 2; i++) {
+            arrayQueue.enqueue(i);
+        }
+        System.out.println(arrayQueue);
+        for (int i = 0; i < 10; i++) {
+            arrayQueue.enqueue(i);
+        }
+        System.out.println(arrayQueue);
+    }
+
+    private static void testLinkedStack() {
         LinkedStack<Integer> linkedStack = new LinkedStack<>();
         for (int i = 0; i < 10; i++) {
             linkedStack.push(i);
