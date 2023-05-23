@@ -5,14 +5,10 @@ import org.common.struct.Node;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.common.Utils.swap;
+
 public class Sort {
 
-    // 交换元素的辅助方法
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
-    }
 
     /**
      * 插入排序，特点：原地排序算法，稳定排序、平均时间复杂度O(n)

@@ -27,6 +27,13 @@ public class Utils {
         return node;
     }
 
+
+    // 交换元素的辅助方法
+    public static void swap(int[] arr, int i, int j) {
+        int temp = arr[j];
+        arr[j] = arr[i];
+        arr[i] = temp;
+    }
     public static void main(String[] args) {
 
     }
